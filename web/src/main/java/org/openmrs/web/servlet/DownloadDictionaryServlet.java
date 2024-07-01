@@ -13,6 +13,7 @@
  */
 package org.openmrs.web.servlet;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,7 +64,7 @@ public class DownloadDictionaryServlet extends HttpServlet {
 			String s = new SimpleDateFormat("dMy_Hm").format(new Date());
 			
 			response.setHeader("Content-Type", "text/csv;charset=UTF-8");
-			response.setHeader("Content-Disposition", "attachment; filename=conceptDictionary" + s + ".csv");
+			response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=conceptDictionary" + s + ".csv"));
 			
 			StringBuilder line = new StringBuilder(
 			        "Concept Id,Name,Description,Synonyms,Answers,Set Members,Class,Datatype,Changed By,Creator\n");

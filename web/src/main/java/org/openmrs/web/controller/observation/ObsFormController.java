@@ -13,6 +13,7 @@
  */
 package org.openmrs.web.controller.observation;
 
+import io.github.pixee.security.Filenames;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -318,7 +319,7 @@ public class ObsFormController extends SimpleFormController {
 			if (complexDataFile != null && !complexDataFile.isEmpty()) {
 				complexDataInputStream = complexDataFile.getInputStream();
 				
-				ComplexData complexData = new ComplexData(complexDataFile.getOriginalFilename(), complexDataInputStream);
+				ComplexData complexData = new ComplexData(Filenames.toSimpleFileName(complexDataFile.getOriginalFilename()), complexDataInputStream);
 				
 				obs.setComplexData(complexData);
 			}

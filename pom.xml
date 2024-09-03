@@ -616,7 +616,13 @@
 				<artifactId>sonar-jacoco-listeners</artifactId>
 				<version>1.2</version>
 			</dependency>
-        </dependencies>
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
 
 	<build>
@@ -1114,5 +1120,6 @@
 		<sonar.analysis.mode>incremental</sonar.analysis.mode>
 		
 		<argLine>-Duser.language=en -Duser.region=US -Xmx512m -XX:MaxPermSize=512m ${customArgLineForTesting}</argLine>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 </project>

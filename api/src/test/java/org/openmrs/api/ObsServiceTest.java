@@ -13,6 +13,7 @@
  */
 package org.openmrs.api;
 
+import java.nio.file.Files;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -663,19 +664,17 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 		File previouslyCreatedFile = new File(complexObsDir, "nameOfFile.txt");
 		Reader input = new CharArrayReader("a string to save to a file".toCharArray());
 		Reader buffReader = new BufferedReader(input);
-		Writer buffWriter = new BufferedWriter(new FileWriter(previouslyCreatedFile));
-		while (true) {
+		try (Writer buffWriter = Files.newBufferedWriter(previouslyCreatedFile.toPath())) {
+		    while (true) {
 			int character = buffReader.read();
 			if (character == -1) {
 				break;
 			}
 			buffWriter.write(character);
 		}
-		input.close();
-		
-		// the file we'll be creating...defining it here so we can delete it in a finally block
-		File newComplexFile = null;
-		try {
+		    input.close();
+		    File newComplexFile = null;
+		    try {
 			
 			long oldFileSize = previouslyCreatedFile.length();
 			
@@ -715,6 +714,9 @@ public class ObsServiceTest extends BaseContextSensitiveTest {
 				// pass
 			}
 		}
+		}
+		
+
 		
 	}
 	

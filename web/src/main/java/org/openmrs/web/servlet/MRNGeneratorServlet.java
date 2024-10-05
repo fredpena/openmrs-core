@@ -13,6 +13,7 @@
  */
 package org.openmrs.web.servlet;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -64,7 +65,7 @@ public class MRNGeneratorServlet extends HttpServlet {
 		String filename = site + "_" + mrnFirst + "-" + (mrnFirst + (mrnCount - 1)) + prefix + ".txt";
 		
 		response.setHeader("Content-Type", "text");
-		response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+		response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + filename));
 		
 		Integer end = mrnCount + mrnFirst;
 		while (mrnFirst < end) {

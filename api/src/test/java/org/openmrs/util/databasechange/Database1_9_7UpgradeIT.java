@@ -13,6 +13,7 @@
  */
 package org.openmrs.util.databasechange;
 
+import java.nio.file.Files;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -117,7 +118,7 @@ public class Database1_9_7UpgradeIT {
 	
 	@BeforeClass
 	public static void beforeClass() throws IOException {
-		testAppDataDir = File.createTempFile("appdir-for-unit-tests", "");
+		testAppDataDir = Files.createTempFile("appdir-for-unit-tests", "").toFile();
 		testAppDataDir.delete();// so we can make turn it into a directory
 		testAppDataDir.mkdir();
 		

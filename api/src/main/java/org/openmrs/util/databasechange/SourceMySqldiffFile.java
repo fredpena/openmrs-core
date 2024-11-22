@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,7 +92,7 @@ public class SourceMySqldiffFile implements CustomTaskChange {
 		// copy the file from the classpath to a real file
 		File tmpOutputFile = null;
 		try {
-			tmpOutputFile = File.createTempFile(sqlFile, "tmp");
+			tmpOutputFile = Files.createTempFile(sqlFile, "tmp").toFile();
 			InputStream sqlFileInputStream = fileOpener.getResourceAsStream(sqlFile);
 			OutputStream outputStream = new FileOutputStream(tmpOutputFile);
 			OpenmrsUtil.copyFile(sqlFileInputStream, outputStream);

@@ -26,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -145,7 +146,7 @@ public class TestInstallUtil {
 		boolean successfullyAdded = true;
 		
 		try {
-			tempFile = File.createTempFile("modules", null);
+			tempFile = Files.createTempFile("modules", null).toFile();
 			out = new FileOutputStream(tempFile);
 			IOUtils.copy(in, out);
 			zipFile = new ZipFile(tempFile);

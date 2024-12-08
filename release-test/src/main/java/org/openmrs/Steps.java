@@ -13,6 +13,7 @@
  */
 package org.openmrs;
 
+import java.security.SecureRandom;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.jbehave.core.annotations.Given;
@@ -183,7 +184,7 @@ public abstract class Steps {
 	 * @return value suffixed with a random number
 	 */
 	protected String random(String value) {
-		return value + new Random().nextInt(100);
+		return value + new SecureRandom().nextInt(100);
 	}
 
 	/**

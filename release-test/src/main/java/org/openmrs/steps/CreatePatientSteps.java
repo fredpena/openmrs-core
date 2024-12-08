@@ -13,6 +13,7 @@
  */
 package org.openmrs.steps;
 
+import java.security.SecureRandom;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -73,7 +74,7 @@ public class CreatePatientSteps extends Steps {
 
 	@When("I enter $code as Identifier Code")
 	public void enterIdentifierCode(String code) {
-		Random randomGenerator = new Random();
+		Random randomGenerator = new SecureRandom();
 		int randomInt = randomGenerator.nextInt(100);
 		type(code + Integer.toString(randomInt),
 				finderByXpath("//form[@id=\'patientModel\']//table[@id=\'identifiers\']//tr[@id=\'existingIdentifiersRow[0]\']/td[1]/input"));

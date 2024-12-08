@@ -13,6 +13,7 @@
  */
 package org.openmrs;
 
+import java.security.SecureRandom;
 import static junit.framework.TestCase.assertEquals;
 import static org.openmrs.test.TestUtil.createDateTime;
 
@@ -160,7 +161,7 @@ public class SimpleDosingInstructionsTest extends BaseContextSensitiveTest {
 	}
 	
 	private Concept createConceptWithName(String name) {
-		Concept concept = new Concept(new Random().nextInt());
+		Concept concept = new Concept(new SecureRandom().nextInt());
 		ConceptName conceptName = new ConceptName();
 		conceptName.setName(name);
 		conceptName.setLocale(Context.getLocale());

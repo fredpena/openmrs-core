@@ -15,6 +15,7 @@ package org.openmrs.web.filter.initialization;
 
 import java.io.*;
 import java.net.URI;
+import java.security.SecureRandom;
 import java.sql.*;
 import java.util.*;
 import java.util.zip.ZipInputStream;
@@ -1374,7 +1375,7 @@ public class InitializationFilter extends StartupFilter {
 							// generate random password from this subset of alphabet
 							// intentionally left out these characters: ufsb$() to prevent certain words forming randomly
 							String chars = "acdeghijklmnopqrtvwxyzACDEGHIJKLMNOPQRTVWXYZ0123456789.|~@#^&";
-							Random r = new Random();
+							Random r = new SecureRandom();
 							StringBuilder randomStr = new StringBuilder("");
 							for (int x = 0; x < 12; x++) {
 								randomStr.append(chars.charAt(r.nextInt(chars.length())));

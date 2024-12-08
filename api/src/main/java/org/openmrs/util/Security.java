@@ -201,7 +201,7 @@ public class Security {
 	 * @return a secure random token.
 	 */
 	public static String getRandomToken() throws APIException {
-		Random rng = new Random();
+		Random rng = new SecureRandom();
 		return encodeString(Long.toString(System.currentTimeMillis()) + Long.toString(rng.nextLong()));
 	}
 	

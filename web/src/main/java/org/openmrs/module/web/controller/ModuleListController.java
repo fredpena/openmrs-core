@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.web.controller;
 
+import io.github.pixee.security.Filenames;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -127,7 +128,7 @@ public class ModuleListController extends SimpleFormController {
 						MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 						MultipartFile multipartModuleFile = multipartRequest.getFile("moduleFile");
 						if (multipartModuleFile != null && !multipartModuleFile.isEmpty()) {
-							String filename = WebUtil.stripFilename(multipartModuleFile.getOriginalFilename());
+							String filename = WebUtil.stripFilename(Filenames.toSimpleFileName(multipartModuleFile.getOriginalFilename()));
 							// if user is using the "upload an update" form instead of the main form
 							if (updateModule) {
 								// parse the module so that we can get the id

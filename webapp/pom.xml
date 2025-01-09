@@ -36,7 +36,11 @@
             </exclusion>
          </exclusions>
       </dependency>
-   </dependencies>
+    <dependency>
+      <groupId>io.github.pixee</groupId>
+      <artifactId>java-security-toolkit</artifactId>
+    </dependency>
+  </dependencies>
 
    <build>
       <finalName>${webapp.name}</finalName>
@@ -69,7 +73,7 @@
                   </goals>
                   <configuration>
                      <tasks>
-                        <unzip src="src/main/resources/liquibase-demo-data.zip" dest="${project.build.outputDirectory}" />
+                        <unzip src="src/main/resources/liquibase-demo-data.zip" dest="${project.build.outputDirectory}"/>
                      </tasks>
                   </configuration>
                </execution>

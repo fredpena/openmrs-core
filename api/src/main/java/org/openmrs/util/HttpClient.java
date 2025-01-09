@@ -14,6 +14,7 @@
 
 package org.openmrs.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -82,7 +83,7 @@ public class HttpClient {
 			// Get the response
 			rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String line;
-			while ((line = rd.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(rd, 5_000_000)) != null) {
 				response = String.format("%s%s\n", response, line);
 			}
 			

@@ -13,6 +13,7 @@
  */
 package org.openmrs.web.controller.customdatatype;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -101,13 +102,13 @@ public class CustomValueController {
 		
 		// render the output
 		DownloadableDatatypeHandler<?> downloadHandler = (DownloadableDatatypeHandler<?>) handler;
-		response.setHeader("Content-Type", downloadHandler.getContentType(datatype, valueReference));
+		response.setHeader("Content-Type", Newlines.stripAll(downloadHandler.getContentType(datatype, valueReference)));
 		
 		String filename = downloadHandler.getFilename(datatype, valueReference);
 		if (filename == null) {
 			filename = "openmrs-custom-value_" + valueReference + ".txt";
 		}
-		response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+		response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + filename));
 		
 		// write the resource as a string
 		OutputStream out = response.getOutputStream();

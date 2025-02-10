@@ -13,6 +13,7 @@
  */
 package org.openmrs.web.servlet;
 
+import io.github.pixee.security.Newlines;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -70,14 +71,14 @@ public class ComplexObsServlet extends HttpServlet {
 		Object data = cd.getData();
 		
 		if (null != download) {
-			response.setHeader("Content-Disposition", "attachment; filename=" + cd.getTitle());
+			response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + cd.getTitle()));
 			response.setHeader("Pragma", "no-cache");
 		}
 		
 		String mimeType = cd.getMIMEType();
 		
 		if (null != mimeType) {
-			response.setHeader("Content-Type", mimeType);
+			response.setHeader("Content-Type", Newlines.stripAll(mimeType));
 		}
 		
 		if (data instanceof byte[]) {

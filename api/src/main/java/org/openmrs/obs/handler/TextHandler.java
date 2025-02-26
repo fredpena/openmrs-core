@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -117,7 +118,7 @@ public class TextHandler extends AbstractHandler implements ComplexObsHandler {
 		BufferedWriter fout = null;
 		try {
 			File outfile = getOutputFileToWrite(obs);
-			fout = new BufferedWriter(new FileWriter(outfile));
+			fout = Files.newBufferedWriter(outfile.toPath());
 			Reader tempRd = null;
 			Object data = obs.getComplexData().getData();
 			if (data instanceof char[]) {

@@ -15,6 +15,7 @@ package org.openmrs.web.filter.initialization;
 
 import java.io.*;
 import java.net.URI;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.*;
 import java.util.zip.ZipInputStream;
@@ -1064,7 +1065,7 @@ public class InitializationFilter extends StartupFilter {
 			ZipInputStream zipIn = new ZipInputStream(in);
 			zipIn.getNextEntry();
 			
-			tempFile = File.createTempFile("testDataSet", "dump");
+			tempFile = Files.createTempFile("testDataSet", "dump").toFile();
 			fileOut = new FileOutputStream(tempFile);
 			
 			IOUtils.copy(zipIn, fileOut);

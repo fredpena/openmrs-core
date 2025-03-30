@@ -13,6 +13,7 @@
  */
 package org.openmrs.module;
 
+import java.nio.file.Files;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.assertThat;
@@ -531,7 +532,7 @@ public class ModuleUtilTest extends BaseContextMockTest {
 			moduleStream = getClass().getClassLoader().getResourceAsStream(
 			    "org/openmrs/module/include/" + moduleId + "-" + version + ".omod");
 			Assert.assertNotNull(moduleStream);
-			tempFile = File.createTempFile("moduleTest", "omod");
+			tempFile = Files.createTempFile("moduleTest", "omod").toFile();
 			tempFileStream = new FileOutputStream(tempFile);
 			IOUtils.copy(moduleStream, tempFileStream);
 			jarFile = new JarFile(tempFile);

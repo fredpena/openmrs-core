@@ -13,6 +13,7 @@
  */
 package org.openmrs;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -100,7 +101,7 @@ public class PropertiesFileValidator {
 
 		List<String> result = new ArrayList<String>();
 
-		while ((line = bufferedReader.readLine()) != null) {
+		while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
 			result.add(line);
 		}
 		return result;

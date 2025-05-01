@@ -13,6 +13,7 @@
  */
 package org.openmrs.test;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -188,7 +189,7 @@ public class MigrateDataSet {
 			// file system permission issue.
 			// Could not create lcab.tmp file in default working directory
 			// (jmiranda).
-			Process p = (wd != null) ? Runtime.getRuntime().exec(cmds, null, wd) : Runtime.getRuntime().exec(cmds);
+			Process p = (wd != null) ? SystemCommand.runCommand(Runtime.getRuntime(), cmds, null, wd) : SystemCommand.runCommand(Runtime.getRuntime(), cmds);
 			
 			// get the stdout
 			out.append("Normal cmd output:\n");

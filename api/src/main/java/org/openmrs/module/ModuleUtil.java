@@ -13,6 +13,8 @@
  */
 package org.openmrs.module;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -649,7 +651,7 @@ public class ModuleUtil {
 					String loc = http.getHeaderField("Location");
 					URL target = null;
 					if (loc != null) {
-						target = new URL(base, loc);
+						target = Urls.create(base, loc, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 					}
 					http.disconnect();
 					// Redirection should be allowed only for HTTP and HTTPS
@@ -723,7 +725,7 @@ public class ModuleUtil {
 			if (updateURL != null && !updateURL.equals("")) {
 				try {
 					// get the contents pointed to by the url
-					URL url = new URL(updateURL);
+					URL url = Urls.create(updateURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 					if (!url.toString().endsWith(ModuleConstants.UPDATE_FILE_NAME)) {
 						log.warn("Illegal url: " + url);
 						continue;

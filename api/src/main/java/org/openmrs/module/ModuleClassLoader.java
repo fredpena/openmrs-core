@@ -13,6 +13,8 @@
  */
 package org.openmrs.module;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -1101,7 +1103,7 @@ public class ModuleClassLoader extends URLClassLoader {
 		}
 		try {
 			String file = url.getFile();
-			new URL(url.getProtocol(), url.getHost(), file.substring(0, file.length() - name.length()));
+			Urls.create(url.getProtocol(), url.getHost(), file.substring(0, file.length() - name.length()), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		}
 		catch (MalformedURLException mue) {
 			log.error("can't get resource library URL", mue);

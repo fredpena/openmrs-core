@@ -13,6 +13,8 @@
  */
 package org.openmrs.module.web.controller;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -119,7 +121,7 @@ public class ModuleListController extends SimpleFormController {
 							throw new MalformedURLException("Couldn't download module because no url was provided");
 						}
 						String fileName = downloadURL.substring(downloadURL.lastIndexOf("/") + 1);
-						final URL url = new URL(downloadURL);
+						final URL url = Urls.create(downloadURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 						inputStream = ModuleUtil.getURLStream(url);
 						moduleFile = ModuleUtil.insertModuleFile(inputStream, fileName);
 					} else if (request instanceof MultipartHttpServletRequest) {

@@ -13,6 +13,8 @@
  */
 package org.openmrs.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.BufferedInputStream;
@@ -1172,7 +1174,7 @@ public class OpenmrsUtil {
 			throw new MalformedURLException(url.toExternalForm());
 		}
 		String path = urlStr.substring(p + 2);
-		file = url2file(new URL(urlStr.substring(4, p)));
+		file = url2file(Urls.create(urlStr.substring(4, p), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
 		if (file == null) {// non-local JAR file URL
 			return url.openStream();
 		}
@@ -2130,7 +2132,7 @@ public class OpenmrsUtil {
 			}
 			
 			// Send the data
-			URL url = new URL(urlString);
+			URL url = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setDoInput(true);

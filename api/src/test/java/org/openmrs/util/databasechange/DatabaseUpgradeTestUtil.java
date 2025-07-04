@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -72,7 +73,7 @@ public class DatabaseUpgradeTestUtil {
 	public DatabaseUpgradeTestUtil(String initialDatabasePath) throws IOException, SQLException {
 		InputStream databaseInputStream = getClass().getResourceAsStream(initialDatabasePath);
 		
-		tempDir = File.createTempFile("openmrs-tests-temp-", "");
+		tempDir = Files.createTempFile("openmrs-tests-temp-", "").toFile();
 		tempDir.delete();
 		tempDir.mkdir();
 		tempDir.deleteOnExit();

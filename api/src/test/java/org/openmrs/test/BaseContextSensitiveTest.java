@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -272,7 +273,7 @@ public abstract class BaseContextSensitiveTest extends AbstractJUnit4SpringConte
 		runtimeProperties.setProperty(ModuleConstants.IGNORE_CORE_MODULES_PROPERTY, "true");
 		
 		try {
-			File tempappdir = File.createTempFile("appdir-for-unit-tests-", "");
+			File tempappdir = Files.createTempFile("appdir-for-unit-tests-", "").toFile();
 			tempappdir.delete(); // so we can make it into a directory
 			tempappdir.mkdir(); // turn it into a directory
 			tempappdir.deleteOnExit(); // clean up when we're done with tests

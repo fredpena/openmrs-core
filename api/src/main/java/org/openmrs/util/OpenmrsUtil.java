@@ -13,6 +13,7 @@
  */
 package org.openmrs.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.BufferedInputStream;
@@ -2146,7 +2147,7 @@ public class OpenmrsUtil {
 			// Get the response
 			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line;
-			while ((line = rd.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(rd, 5_000_000)) != null) {
 				response.append(line).append("\n");
 			}
 			

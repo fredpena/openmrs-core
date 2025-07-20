@@ -13,6 +13,7 @@
  */
 package org.openmrs.web.filter.initialization;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -84,7 +85,7 @@ public class TestInstallUtil {
 				br = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 				String line;
 				StringBuffer sb = new StringBuffer();
-				while ((line = br.readLine()) != null) {
+				while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
 					sb.append(System.getProperty("line.separator"));
 					sb.append(line);
 				}

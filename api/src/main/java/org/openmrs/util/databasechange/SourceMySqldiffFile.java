@@ -13,6 +13,7 @@
  */
 package org.openmrs.util.databasechange;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -201,8 +202,7 @@ public class SourceMySqldiffFile implements CustomTaskChange {
 			wd = null;
 		}
 		
-		Process p = (wd != null) ? Runtime.getRuntime().exec(cmdWithArguments, null, wd) : Runtime.getRuntime().exec(
-		    cmdWithArguments);
+		Process p = (wd != null) ? SystemCommand.runCommand(Runtime.getRuntime(), cmdWithArguments, null, wd) : SystemCommand.runCommand(Runtime.getRuntime(), cmdWithArguments);
 		
 		out.append("Normal cmd output:\n");
 		Reader reader = new InputStreamReader(p.getInputStream());
